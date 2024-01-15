@@ -1,0 +1,13 @@
+# Untracked files:
+
+.DS_Store
+*.pyc
+*.json
+cal.csv
+*.txt
+cal/
+json/
+plots/
+raw/
+res/
+result/

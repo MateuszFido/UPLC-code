@@ -12,20 +12,20 @@ from collections import OrderedDict
 # Log script run-time 
 st = time.time()
 
-file_path = Path('C:\\Users\\drago\\OneDrive - ETH Zurich\\Mice\\UPLC code')
-RT_peaks = {1.433: 'glutamate', 
-            1.886: 'int_std', 
-            3.293: 'glutamine', 
-            5.940: 'citrulline',
+file_path = Path('/Users/mateuszfido/Library/CloudStorage/OneDrive-ETHZurich/Mice/UPLC code')
+RT_peaks = {1.433: 'Glu', 
+            1.886: 'internal standard', 
+            3.293: 'Gln', 
+            5.940: 'Citrulline',
             6.406: 'X',
             7.493: 'GABA',
-            7.906: 'alanine',
-            10.020: 'Nh4Cl',
-            12.653: 'valine',
-            13.880: 'tryptophan',
-            14.186: 'isoleucine',
+            7.906: 'Ala',
+            10.020: 'NH4Cl',
+            12.653: 'Val',
+            13.880: 'Trp',
+            14.186: 'Iso',
             14.480: 'Leu-Phe',
-            15.433: 'ornithine'}
+            15.433: 'Orn'}
 RT_peaks =  dict(sorted(RT_peaks.items()))  # convert to sorted
 
 cal_files, res_files = list_files(file_path)
@@ -35,6 +35,7 @@ print('Found measurement files:', res_files, '\n')
 
 # Calculate the calibration curve 
 for cal_file in cal_files:
+    print(f'Analyzing {cal_file}...')
     dataframe = load_absorbance_data(file_path / cal_file)                                          # load the data into a pd.DataFrame
     baseline_corrected_data, baseline = perform_background_correction(dataframe, cal_file)          # perform background correction (bg_corr.py)
     peaks = detect_and_highlight_peaks(dataframe['Time (min)'], baseline_corrected_data, RT_peaks)  # detect peaks and align with RTs (find_peaks.py)
