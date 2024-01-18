@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
+import os
 
 def perform_background_correction(dataframe: pd.DataFrame, file_name):
     
@@ -31,31 +33,36 @@ def perform_background_correction(dataframe: pd.DataFrame, file_name):
     baseline_corrected = np.round(
         (absorbance - inv_tform), decimals=9)
     baseline = inv_tform + shift
-    
-    #'''
-    # Debugging
-    # Plotting chromatogram before and after background correction
-    plt.figure(figsize=(10, 6))
 
-    # Before background correction
-    plt.subplot(2, 1, 1)
-    plt.plot(time, dataframe['Value (mAU)'].values, label='Before Correction', color='blue')
-    plt.title(f'{file_name} Before Background Correction')
+    # Create and save the plots as PNG files
+    plt.figure(figsize=(12, 8))
+    gs = gridspec.GridSpec(2, 1, height_ratios=[1, 1])
+
+    # Plotting chromatogram before background correction
+    plt.subplot(gs[0])
+    plt.plot(dataframe['Time (min)'], dataframe['Value (mAU)'], label='Before Correction', color='blue')
+    plt.plot(dataframe['Time (min)'], baseline, label='Baseline', color='red', linestyle='--')
+    plt.title('Chromatogram Before Background Correction')
     plt.xlabel('Time (min)')
     plt.ylabel('Absorbance (mAU)')
     plt.legend()
 
-    # After background correction
-    plt.subplot(2, 1, 2)
+    # Plotting chromatogram after background correction
+    plt.subplot(gs[1])
     plt.plot(dataframe['Time (min)'], baseline_corrected, label='After Correction', color='green')
-    plt.plot(dataframe['Time (min)'], baseline, label='Baseline', color='red', linestyle='--')
-    plt.title(f'{file_name} After Background Correction')
+    plt.title('Chromatogram After Background Correction')
     plt.xlabel('Time (min)')
     plt.ylabel('Absorbance (mAU)')
     plt.legend()
 
     plt.tight_layout()
-    plt.show()
-    #'''
+
+    # Create the "plots" directory if it doesn't exist
+    bg_dir = os.path.join('plots', 'background_correction')
+    os.makedirs(bg_dir, exist_ok=True)
+
+    # Save the plot as a PNG file
+    plt.savefig(os.path.join(bg_dir, f'{os.path.splitext(file_name)[0]}_background_correction.png'))
+    plt.close('all')
     
     return baseline_corrected, baseline

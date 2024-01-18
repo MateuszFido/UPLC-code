@@ -1,46 +1,50 @@
 import os
-import pandas as pd
-import re
 import matplotlib.pyplot as plt
+import pandas as pd
+from scipy.stats import linregress
 
-# Function to integrate peaks and create a calibration curve
-def create_calibration_curve(calibration_files, retention_times, time, baseline_corrected_data):
-    calibration_data = []
+def cal_curves(all_compounds):
+    compounds_df = pd.DataFrame(
+        {'Name': [compound.name for compound in all_compounds],
+        'Concentration (mM)': [compound.concentration for compound in all_compounds],
+        'Area': [compound.area for compound in all_compounds]})
 
-    # Iterate over all calibration files
-    for calibration_file in calibration_files:
-        # Load calibration data
-        calibration_dataframe = load_absorbance_data(calibration_file)
+    # Create and plot individual calibration curves in separate subplots
+    unique_compounds = compounds_df['Name'].unique()
+    num_compounds = len(unique_compounds)
+    plt.figure(figsize=(15, 10))
+
+    # Create the "plots" directory if it doesn't exist
+    cal_dir = os.path.join('plots', 'calibration_curves')
+    os.makedirs(cal_dir, exist_ok=True)
+    
+    slope_intercept_values = {}
+
+    for idx, compound_name in enumerate(unique_compounds, start=1):
+        plt.figure(figsize=(8, 6))
+        plt.scatter(compounds_df.loc[compounds_df['Name'] == compound_name, 'Concentration (mM)'],
+                    compounds_df.loc[compounds_df['Name'] == compound_name, 'Area'],
+                    label=f'{compound_name} Calibration Curve',
+                    color=plt.cm.jet(idx / num_compounds))
         
-        # Extract concentration from the filename
-        concentration = extract_concentration(calibration_file)
+        # Fit a linear equation to the concentration-peak area relationship
+        slope, intercept, _, _, _ = linregress(compounds_df.loc[compounds_df['Name'] == compound_name, 'Concentration (mM)'],
+                                               compounds_df.loc[compounds_df['Name'] == compound_name, 'Area'])
+        slope_intercept_values[compound_name] = {'Slope': slope, 'Intercept': intercept}
+        
+        # Plot the fitted curve
+        plt.plot(compounds_df.loc[compounds_df['Name'] == compound_name, 'Concentration (mM)'],
+                 slope * compounds_df.loc[compounds_df['Name'] == compound_name, 'Concentration (mM)'] + intercept,
+                 color='black', linestyle='--',
+                 label=f'Fit: y = {slope:.4f}x + {intercept:.4f}')
 
-        # Detect and highlight peaks in the calibration data
-        peaks, _ = find_peaks(calibration_dataframe['Value (mAU)'], height=0)
+        plt.title(f'{compound_name} Calibration Curve')
+        plt.xlabel('Concentration (mM)')
+        plt.ylabel('Peak Area')
+        plt.legend()
+        
+        # Save the plot as a PNG file
+        plt.savefig(os.path.join(cal_dir, f'{compound_name}_calibration_curve.png'))
+        plt.close()
 
-        # Integrate peak areas
-        peak_areas = np.trapz(baseline_corrected_data[peaks], dx=np.diff(time[peaks]))
-
-        # Append data to the calibration_data list
-        calibration_data.append({'Concentration (mM)': concentration, 'Peak Area': peak_areas})
-
-    # Create a DataFrame from the calibration_data list
-    calibration_df = pd.DataFrame(calibration_data)
-
-    # Save the calibration data to a CSV file
-    calibration_df.to_csv('calibration_curve.csv', index=False)
-
-    # Plot the calibration curve
-    plt.figure(figsize=(10, 6))
-    plt.scatter(calibration_df['Concentration (mM)'], calibration_df['Peak Area'], label='Calibration Data', color='blue')
-    plt.title('Calibration Curve')
-    plt.xlabel('Concentration (mM)')
-    plt.ylabel('Peak Area')
-    plt.legend()
-    plt.show()
-
-# Example usage: Replace 'calibration_files' with the actual list of calibration file paths
-calibration_files = [..., '0.1mM_XXXX.txt', '0.5mM_XXXX.txt', '1mM_XXXX.txt', '2.5mM_XXXX.txt', '10mM_XXXX.txt', ...]
-
-# Call the function to create the calibration curve
-create_calibration_curve(calibration_files, retention_times, time, baseline_corrected_data)
+    return slope_intercept_values

@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.signal import find_peaks
 import matplotlib.pyplot as plt
-
+import os
 
 class Compound:
     def __init__(self, index, name, area, rt):
@@ -14,26 +14,11 @@ class Compound:
         return f"Peak: {self.name} (index: {self.index}) with retention time: {self.rt} min, total area: {self.area} mAU."
         
 
-def detect_and_highlight_peaks(time, baseline_corrected_data, retention_times: dict):
+def detect_and_highlight_peaks(time, baseline_corrected_data, retention_times: dict, filename):
     
     # Find peaks in the baseline-corrected data
     peaks, prominences = find_peaks(baseline_corrected_data, prominence=1)
     compound_list = []
-
-    '''
-    # Debug
-    for i in range(0, len(peaks)):                                                                       # [0] is peak indices, [1] is peak properties
-        index = peaks[i]                                                                                 
-        peak_area = np.trapz(baseline_corrected_data[peaks[1]['left_bases'][i]:peaks[1]['right_bases'][i]]) # integrate within each peak's boundaries
-        rt = time[peaks[i]]
-        if np.abs(rt - sorted(retention_times)[i]) <= 0.03:
-            name = retention_times[sorted(retention_times)[i]]
-        else:
-            continue
-        peak = Peak(index=index, name=name, area=peak_area, rt=rt)
-        peak_list.append(peak)
-        print(vars(peak))
-    '''    
     
     for key, value in retention_times.items():
         peak_number = np.argmin(np.abs(time[peaks] - key))
@@ -54,6 +39,10 @@ def detect_and_highlight_peaks(time, baseline_corrected_data, retention_times: d
         else:
             continue
     
+    # Create "peaks" subfolder in "plots" directory if it doesn't exist
+    peaks_plots_dir = os.path.join('plots', 'peaks')
+    os.makedirs(peaks_plots_dir, exist_ok=True)
+    
     # Plotting chromatogram and highlighting peaks
     plt.figure(figsize=(10, 6))
     plt.plot(time, baseline_corrected_data, label='Chromatogram (Baseline Corrected)', color='blue')
@@ -72,6 +61,11 @@ def detect_and_highlight_peaks(time, baseline_corrected_data, retention_times: d
     plt.xlabel('Time (min)')
     plt.ylabel('Absorbance (mAU)')
     plt.legend()
-    plt.show()
+
+    # Save the plot as a PNG file
+    plt.savefig(os.path.join(peaks_plots_dir, f'peaks_{os.path.splitext(filename)[0]}.png'))
     
-    return peaks
+    # Close the figure
+    plt.close()
+    
+    return compound_list
