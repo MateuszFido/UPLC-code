@@ -2,6 +2,7 @@ import numpy as np
 from scipy.signal import find_peaks
 import matplotlib.pyplot as plt
 import os
+from pathlib import Path
 
 class Compound:
     def __init__(self, index, name, area, rt):
@@ -14,7 +15,7 @@ class Compound:
         return f"Peak: {self.name} (index: {self.index}) with retention time: {self.rt} min, total area: {self.area} mAU."
         
 
-def detect_and_highlight_peaks(time, baseline_corrected_data, retention_times: dict, filename):
+def detect_and_highlight_peaks(time, baseline_corrected_data, retention_times: dict, filename, file_path):
     
     # Find peaks in the baseline-corrected data
     peaks, prominences = find_peaks(baseline_corrected_data, prominence=1)
@@ -22,11 +23,9 @@ def detect_and_highlight_peaks(time, baseline_corrected_data, retention_times: d
     
     for key, value in retention_times.items():
         peak_number = np.argmin(np.abs(time[peaks] - key))
-        # Debug
-        # print(list(time[peaks]), key, time[peaks[peak_number]])
         rt = time[peaks[peak_number]]
         rt_difference = np.abs(rt - key)
-        if rt_difference <= 0.5:
+        if rt_difference <= 0.3:
             peak_contour = range(prominences['left_bases'][peak_number], prominences['right_bases'][peak_number], 1)
             area = np.round(np.trapz(baseline_corrected_data[peak_contour], peak_contour))
             index = peaks[peak_number]
@@ -40,7 +39,7 @@ def detect_and_highlight_peaks(time, baseline_corrected_data, retention_times: d
             continue
     
     # Create "peaks" subfolder in "plots" directory if it doesn't exist
-    peaks_plots_dir = os.path.join('plots', 'peaks')
+    peaks_plots_dir = Path(file_path / 'plots' / 'peaks')
     os.makedirs(peaks_plots_dir, exist_ok=True)
     
     # Plotting chromatogram and highlighting peaks

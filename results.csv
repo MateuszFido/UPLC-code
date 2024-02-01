@@ -1,0 +1,121 @@
+File
+PLA25_UV_VIS_1.txt,Compound,Concentration,Slope,Intercept,R-squared
+,Glu,12.24 mM,-80.43,1011.52,0.0849
+,internal standard,105.66 mM,5.51,1834.79,0.7716
+,Gln,-8.94 mM,20.6,375.25,0.0387
+,Citrulline,0.09 mM,1947.86,-35.86,0.9998
+,GABA,0.09 mM,1013.26,34.45,0.9997
+,NH4Cl,None mM,nan,nan,0.0
+,Val,0.08 mM,1028.12,-15.02,0.9999
+,Trp,-0.47 mM,968.63,547.19,0.99
+,Ile,-0.03 mM,1992.09,148.5,0.9996
+,Orn,0.33 mM,847.78,-246.95,0.9938
+
+PLA44_UV_VIS_1.txt,Compound,Concentration,Slope,Intercept,R-squared
+,Glu,11.94 mM,-80.43,1011.52,0.0849
+,internal standard,50.67 mM,5.51,1834.79,0.7716
+,Gln,-4.04 mM,20.6,375.25,0.0387
+,Citrulline,0.16 mM,1947.86,-35.86,0.9998
+,GABA,0.17 mM,1013.26,34.45,0.9997
+,NH4Cl,None mM,nan,nan,0.0
+,Val,0.08 mM,1028.12,-15.02,0.9999
+,Trp,-0.48 mM,968.63,547.19,0.99
+,Ile,-0.03 mM,1992.09,148.5,0.9996
+,Orn,0.4 mM,847.78,-246.95,0.9938
+
+PLA45_UV_VIS_1.txt,Compound,Concentration,Slope,Intercept,R-squared
+,Glu,12.18 mM,-80.43,1011.52,0.0849
+,internal standard,33.07 mM,5.51,1834.79,0.7716
+,Gln,-6.18 mM,20.6,375.25,0.0387
+,Citrulline,0.1 mM,1947.86,-35.86,0.9998
+,GABA,0.12 mM,1013.26,34.45,0.9997
+,NH4Cl,None mM,nan,nan,0.0
+,Val,0.1 mM,1028.12,-15.02,0.9999
+,Trp,-0.47 mM,968.63,547.19,0.99
+,Ile,-0.02 mM,1992.09,148.5,0.9996
+,Orn,0.32 mM,847.78,-246.95,0.9938
+
+PLA51_UV_VIS_1.txt,Compound,Concentration,Slope,Intercept,R-squared
+,Glu,12.23 mM,-80.43,1011.52,0.0849
+,internal standard,73.36 mM,5.51,1834.79,0.7716
+,Gln,-8.41 mM,20.6,375.25,0.0387
+,Citrulline,0.08 mM,1947.86,-35.86,0.9998
+,GABA,0.1 mM,1013.26,34.45,0.9997
+,NH4Cl,None mM,nan,nan,0.0
+,Val,0.08 mM,1028.12,-15.02,0.9999
+,Trp,-0.48 mM,968.63,547.19,0.99
+,Ile,-0.03 mM,1992.09,148.5,0.9996
+,Orn,0.31 mM,847.78,-246.95,0.9938
+
+PLA58_UV_VIS_1.txt,Compound,Concentration,Slope,Intercept,R-squared
+,Glu,12.14 mM,-80.43,1011.52,0.0849
+,internal standard,170.64 mM,5.51,1834.79,0.7716
+,Gln,-5.74 mM,20.6,375.25,0.0387
+,Citrulline,0.1 mM,1947.86,-35.86,0.9998
+,GABA,0.14 mM,1013.26,34.45,0.9997
+,NH4Cl,None mM,nan,nan,0.0
+,Val,0.09 mM,1028.12,-15.02,0.9999
+,Trp,-0.46 mM,968.63,547.19,0.99
+,Ile,-0.02 mM,1992.09,148.5,0.9996
+,Orn,0.33 mM,847.78,-246.95,0.9938
+
+PLA60_UV_VIS_1.txt,Compound,Concentration,Slope,Intercept,R-squared
+,Glu,12.22 mM,-80.43,1011.52,0.0849
+,internal standard,106.57 mM,5.51,1834.79,0.7716
+,Gln,-8.46 mM,20.6,375.25,0.0387
+,Citrulline,0.08 mM,1947.86,-35.86,0.9998
+,GABA,0.11 mM,1013.26,34.45,0.9997
+,NH4Cl,None mM,nan,nan,0.0
+,Val,0.09 mM,1028.12,-15.02,0.9999
+,Trp,-0.47 mM,968.63,547.19,0.99
+,Ile,-0.03 mM,1992.09,148.5,0.9996
+,Orn,0.32 mM,847.78,-246.95,0.9938
+
+PLA66_UV_VIS_1.txt,Compound,Concentration,Slope,Intercept,R-squared
+,Glu,11.99 mM,-80.43,1011.52,0.0849
+,internal standard,119.09 mM,5.51,1834.79,0.7716
+,Gln,-6.32 mM,20.6,375.25,0.0387
+,Citrulline,0.11 mM,1947.86,-35.86,0.9998
+,GABA,0.12 mM,1013.26,34.45,0.9997
+,NH4Cl,None mM,nan,nan,0.0
+,Val,0.11 mM,1028.12,-15.02,0.9999
+,Trp,-0.45 mM,968.63,547.19,0.99
+,Ile,-0.01 mM,1992.09,148.5,0.9996
+,Orn,0.54 mM,847.78,-246.95,0.9938
+
+PLA67_UV_VIS_1.txt,Compound,Concentration,Slope,Intercept,R-squared
+,Glu,12.02 mM,-80.43,1011.52,0.0849
+,internal standard,70.82 mM,5.51,1834.79,0.7716
+,Gln,-4.67 mM,20.6,375.25,0.0387
+,Citrulline,0.11 mM,1947.86,-35.86,0.9998
+,GABA,0.16 mM,1013.26,34.45,0.9997
+,NH4Cl,None mM,nan,nan,0.0
+,Val,0.09 mM,1028.12,-15.02,0.9999
+,Trp,-0.47 mM,968.63,547.19,0.99
+,Ile,-0.02 mM,1992.09,148.5,0.9996
+,Orn,0.33 mM,847.78,-246.95,0.9938
+
+PLA74_UV_VIS_1.txt,Compound,Concentration,Slope,Intercept,R-squared
+,Glu,12.19 mM,-80.43,1011.52,0.0849
+,internal standard,10.02 mM,5.51,1834.79,0.7716
+,Gln,-5.06 mM,20.6,375.25,0.0387
+,Citrulline,0.07 mM,1947.86,-35.86,0.9998
+,GABA,0.08 mM,1013.26,34.45,0.9997
+,NH4Cl,None mM,nan,nan,0.0
+,Val,0.06 mM,1028.12,-15.02,0.9999
+,Trp,-0.49 mM,968.63,547.19,0.99
+,Ile,-0.04 mM,1992.09,148.5,0.9996
+,Orn,0.32 mM,847.78,-246.95,0.9938
+
+PLA75_UV_VIS_1.txt,Compound,Concentration,Slope,Intercept,R-squared
+,Glu,12.18 mM,-80.43,1011.52,0.0849
+,internal standard,90.24 mM,5.51,1834.79,0.7716
+,Gln,-5.98 mM,20.6,375.25,0.0387
+,Citrulline,0.09 mM,1947.86,-35.86,0.9998
+,GABA,0.1 mM,1013.26,34.45,0.9997
+,NH4Cl,None mM,nan,nan,0.0
+,Val,0.07 mM,1028.12,-15.02,0.9999
+,Trp,-0.48 mM,968.63,547.19,0.99
+,Ile,-0.03 mM,1992.09,148.5,0.9996
+,Orn,0.32 mM,847.78,-246.95,0.9938
+

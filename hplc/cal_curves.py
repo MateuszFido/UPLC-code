@@ -2,8 +2,9 @@ import os
 import matplotlib.pyplot as plt
 import pandas as pd
 from scipy.stats import linregress
+from pathlib import Path
 
-def cal_curves(all_compounds):
+def calibrate(all_compounds, file_path):
     compounds_df = pd.DataFrame(
         {'Name': [compound.name for compound in all_compounds],
         'Concentration (mM)': [compound.concentration for compound in all_compounds],
@@ -15,7 +16,7 @@ def cal_curves(all_compounds):
     plt.figure(figsize=(15, 10))
 
     # Create the "plots" directory if it doesn't exist
-    cal_dir = os.path.join('plots', 'calibration_curves')
+    cal_dir = Path(file_path / 'plots' / 'calibration_curves')
     os.makedirs(cal_dir, exist_ok=True)
     
     slope_intercept_values = {}
@@ -28,9 +29,9 @@ def cal_curves(all_compounds):
                     color=plt.cm.jet(idx / num_compounds))
         
         # Fit a linear equation to the concentration-peak area relationship
-        slope, intercept, _, _, _ = linregress(compounds_df.loc[compounds_df['Name'] == compound_name, 'Concentration (mM)'],
+        slope, intercept, rvalue, _, _ = linregress(compounds_df.loc[compounds_df['Name'] == compound_name, 'Concentration (mM)'],
                                                compounds_df.loc[compounds_df['Name'] == compound_name, 'Area'])
-        slope_intercept_values[compound_name] = {'Slope': slope, 'Intercept': intercept}
+        slope_intercept_values[compound_name] = {'Slope': round(slope, 2), 'Intercept': round(intercept, 2), 'R-squared': round(rvalue ** 2, 4)}
         
         # Plot the fitted curve
         plt.plot(compounds_df.loc[compounds_df['Name'] == compound_name, 'Concentration (mM)'],

@@ -3,7 +3,7 @@ import re
 import shutil
 from pathlib import Path
 
-def list_files(file_path):
+def read_files(file_path):
     file_path = Path(file_path)
             
     folder_contents = os.listdir(file_path)

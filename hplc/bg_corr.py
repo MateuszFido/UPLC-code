@@ -2,9 +2,10 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
+from pathlib import Path
 import os
 
-def perform_background_correction(dataframe: pd.DataFrame, file_name):
+def perform_background_correction(dataframe: pd.DataFrame, file_name, file_path):
     
     # Extract Time (min) and Value (mAU) columns
     time = dataframe.copy()['Time (min)'].values
@@ -58,7 +59,7 @@ def perform_background_correction(dataframe: pd.DataFrame, file_name):
     plt.tight_layout()
 
     # Create the "plots" directory if it doesn't exist
-    bg_dir = os.path.join('plots', 'background_correction')
+    bg_dir = Path(file_path / 'plots' / 'background_correction')
     os.makedirs(bg_dir, exist_ok=True)
 
     # Save the plot as a PNG file
